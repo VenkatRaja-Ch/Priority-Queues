@@ -61,7 +61,7 @@ public class LinkedList <K extends Comparable<K>, V> {
         return head.getValue();
     }
 
-    private boolean isEmpty(){
+    public boolean isEmpty(){
         return (this.size == 0);
     }
 
