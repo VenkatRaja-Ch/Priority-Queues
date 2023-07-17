@@ -16,6 +16,7 @@ public class Main {
         AVLTreePriorityQueueImpl<Integer, String> avlTreePriorityQueue = new AVLTreePriorityQueueImpl<>();
         HeapPriorityQueueImpl<Integer, String> heapPriorityQueue = new HeapPriorityQueueImpl<>(MAX_SIZE);
         ArrayPriorityQueueImpl<Integer, String> arrayPriorityQueue = new ArrayPriorityQueueImpl<>(MAX_SIZE);
+        LinkedListPriorityQueueImpl<Integer, String> linkedListPriorityQueue = new LinkedListPriorityQueueImpl<>();
 
         // <-------------------------------- AA Tree Testing starts ------------------------------->
         System.out.println("AA Tree Testing");
@@ -160,5 +161,34 @@ public class Main {
         System.out.println("Size of the priority queue: " + arrayPriorityQueue.size());
         System.out.println("\n\n\n\n\n\n");
         // <-------------------------------- Array Testing ends -------------------------------->
+
+
+        // <-------------------------------- LinkedList Testing starts ------------------------------->
+        System.out.println("LinkedList Testing!");
+        // Check is priority queue is empty
+        System.out.println("Is priority Queue empty: " + linkedListPriorityQueue.isEmpty());
+        // Check the size of the priority queue
+        System.out.println("Size of the priority queue: " + linkedListPriorityQueue.size());
+
+        // insert elements into the queue
+        linkedListPriorityQueue.insert(4, "Home Assignment");
+        linkedListPriorityQueue.insert(5, "Driving Lessons");
+        linkedListPriorityQueue.insert(1, "Personal Life");
+        linkedListPriorityQueue.insert(2, "Health and Care");
+
+        // Check is priority queue is empty
+        System.out.println("Is priority Queue empty: " + linkedListPriorityQueue.isEmpty());
+        // Check the size of the priority queue
+        System.out.println("Size of the priority queue: " + linkedListPriorityQueue.size());
+
+        // Test for peek and Delete max
+        System.out.println("Peek: " + linkedListPriorityQueue.peek());
+        System.out.println("DeleteMax: " + linkedListPriorityQueue.deleteMax());
+        System.out.println("Peek after Deleting element with highest priority: " + linkedListPriorityQueue.peek());
+
+        // Check the size of the priority queue
+        System.out.println("Size of the priority queue: " + linkedListPriorityQueue.size());
+        System.out.println("\n\n\n\n\n\n");
+        // <-------------------------------- LinkedList Testing ends -------------------------------->
     }
 }
