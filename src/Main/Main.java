@@ -2,14 +2,44 @@ package Main;
 
 import PriorityQueue.PriorityQueueImpl.*;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 // The code snippet tests three different implementations of priority queues: AA Tree, Red-Black Tree, and AVL Tree. It inserts elements into each priority queue, checks if they are empty, retrieves the size, peeks at the highest priority element, deletes
 public class Main {
 
     static int MAX_SIZE = 10;
+    static String PATH_TO_MANUAL_DATASET = "src/TestingDataFiles/ManualDataFile";
+    static String LINE = "";
+    static String CSV_SPLIT_BY = ",";
 
-// The code snippet tests the functionality of three different priority queue implementations: AA Tree, Red-Black Tree, and AVL Tree. It inserts elements into each priority queue, checks if the queue is empty, checks the size of the queue, performs peek and
-    public static void main(String[] args) {
+    public static List<String> extractValuesFromFile(String path) throws IOException{
+
+        List<String> valuesExtracted = new ArrayList<>();
+        String[] currentExtractedValue;
+        BufferedReader br = new BufferedReader(new FileReader(path));
+
+        while((LINE = br.readLine()) != null){
+
+            currentExtractedValue = LINE.split(CSV_SPLIT_BY);
+            valuesExtracted.addAll(Arrays.asList(currentExtractedValue));
+        }
+
+        return valuesExtracted;
+    }
+
+    public static void printSpace(){
+        System.out.println("\n\n\n\n\n\n");
+    }
+
+
+    // The code snippet tests the functionality of three different priority queue implementations: AA Tree, Red-Black Tree, and AVL Tree. It inserts elements into each priority queue, checks if the queue is empty, checks the size of the queue, performs peek and
+        public static void main(String[] args) throws IOException {
 
         AATreePriorityQueueImpl<Integer, String> aaTreePriorityQueue = new AATreePriorityQueueImpl<>();
         RBTreePriorityQueueImpl<Integer, String> rbTreePriorityQueue = new RBTreePriorityQueueImpl<>();
@@ -17,6 +47,10 @@ public class Main {
         HeapPriorityQueueImpl<Integer, String> heapPriorityQueue = new HeapPriorityQueueImpl<>(MAX_SIZE);
         ArrayPriorityQueueImpl<Integer, String> arrayPriorityQueue = new ArrayPriorityQueueImpl<>(MAX_SIZE);
         LinkedListPriorityQueueImpl<Integer, String> linkedListPriorityQueue = new LinkedListPriorityQueueImpl<>();
+
+
+        List<String> test = extractValuesFromFile(PATH_TO_MANUAL_DATASET);
+        test.forEach(System.out::println);
 
         // <-------------------------------- AA Tree Testing starts ------------------------------->
         System.out.println("AA Tree Testing");
@@ -43,7 +77,7 @@ public class Main {
 
         // Check the size of the priority queue
         System.out.println("Size of the priority queue: " + aaTreePriorityQueue.size());
-        System.out.println("\n\n\n\n\n\n");
+        printSpace();
         // <-------------------------------- AA Tree Testing ends -------------------------------->
 
 
@@ -72,7 +106,7 @@ public class Main {
 
         // Check the size of the priority queue
         System.out.println("Size of the priority queue: " + rbTreePriorityQueue.size());
-        System.out.println("\n\n\n\n\n\n");
+        printSpace();
         // <-------------------------------- Red-Black Tree Testing ends -------------------------------->
 
 
