@@ -1,5 +1,6 @@
 package Main;
 
+import PriorityQueue.PriorityQueue;
 import PriorityQueue.PriorityQueueImpl.*;
 
 import java.io.BufferedReader;
@@ -9,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-// The code snippet tests three different implementations of priority queues: AA Tree, Red-Black Tree, and AVL Tree. It inserts elements into each priority queue, checks if they are empty, retrieves the size, peeks at the highest priority element, deletes
 public class Main {
 
     static int MAX_SIZE = 10;
@@ -37,9 +36,52 @@ public class Main {
         System.out.println("\n\n\n\n\n\n");
     }
 
+    public static void insertDataToPriorityQueue(List<String> passedData, PriorityQueue<Integer, String> passedPriorityQueue){
 
-    // The code snippet tests the functionality of three different priority queue implementations: AA Tree, Red-Black Tree, and AVL Tree. It inserts elements into each priority queue, checks if the queue is empty, checks the size of the queue, performs peek and
-        public static void main(String[] args) throws IOException {
+        int length = passedData.size();
+
+        for(int i=0; i < length-1; i += 2 ){
+            int priorityValue = Integer.parseInt(passedData.get(i));
+            String value = passedData.get(i+1);
+            passedPriorityQueue.insert(priorityValue, value);
+        }
+    }
+
+    public static void removeAllDataToPriorityQueue(PriorityQueue<Integer, String> passedPriorityQueue){
+
+        int length = passedPriorityQueue.size();
+
+        for(int i = 0; i < length; i ++){
+            passedPriorityQueue.deleteMax();
+        }
+    }
+
+    public static void test(PriorityQueue<Integer, String> passedPriorityQueue, String priorityQueueName){
+
+        System.out.println(priorityQueueName);
+        // Check is priority queue is empty
+        System.out.println("Is priority Queue empty: " + passedPriorityQueue.isEmpty());
+        // Check the size of the priority queue
+        System.out.println("Size of the priority queue: " + passedPriorityQueue.size());
+
+
+        // Check is priority queue is empty
+        System.out.println("Is priority Queue empty: " + passedPriorityQueue.isEmpty());
+        // Check the size of the priority queue
+        System.out.println("Size of the priority queue: " + passedPriorityQueue.size());
+
+        // Test for peek and Delete max
+        System.out.println("Peek: " + passedPriorityQueue.peek());
+        System.out.println("DeleteMax: " + passedPriorityQueue.deleteMax());
+        System.out.println("Peek after Deleting element with highest priority: " + passedPriorityQueue.peek());
+
+        // Check the size of the priority queue
+        System.out.println("Size of the priority queue: " + passedPriorityQueue.size());
+        printSpace();
+
+    }
+
+    public static void main(String[] args) throws IOException {
 
         AATreePriorityQueueImpl<Integer, String> aaTreePriorityQueue = new AATreePriorityQueueImpl<>();
         RBTreePriorityQueueImpl<Integer, String> rbTreePriorityQueue = new RBTreePriorityQueueImpl<>();
@@ -50,179 +92,36 @@ public class Main {
 
 
         List<String> test = extractValuesFromFile(PATH_TO_MANUAL_DATASET);
-        test.forEach(System.out::println);
+        insertDataToPriorityQueue(test, aaTreePriorityQueue);
+        insertDataToPriorityQueue(test, rbTreePriorityQueue);
+        insertDataToPriorityQueue(test, avlTreePriorityQueue);
+        insertDataToPriorityQueue(test, heapPriorityQueue);
+        insertDataToPriorityQueue(test, arrayPriorityQueue);
+        insertDataToPriorityQueue(test, linkedListPriorityQueue);
 
-        // <-------------------------------- AA Tree Testing starts ------------------------------->
-        System.out.println("AA Tree Testing");
-        // Check is priority queue is empty
-        System.out.println("Is priority Queue empty: " + aaTreePriorityQueue.isEmpty());
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + aaTreePriorityQueue.size());
+        // Testing Priority Queue implemented using AA Tree Data Structure
+        test(aaTreePriorityQueue, "Priority Queue implemented using AA Tree Testing");
 
-        // insert elements into the queue
-        aaTreePriorityQueue.insert(4, "Home Assignment");
-        aaTreePriorityQueue.insert(5, "Driving Lessons");
-        aaTreePriorityQueue.insert(1, "Personal Life");
-        aaTreePriorityQueue.insert(2, "Health and Care");
+        // Testing Priority Queue implemented using RedBlack Tree Data Structure
+        test(rbTreePriorityQueue, "Priority Queue implemented using Red-Black Tree Testing!");
 
-        // Check is priority queue is empty
-        System.out.println("Is priority Queue empty: " + aaTreePriorityQueue.isEmpty());
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + aaTreePriorityQueue.size());
+        // Testing Priority Queue implemented using AVL Tree Data Structure
+        test(avlTreePriorityQueue, "Priority Queue implemented using AVL Tres Testing!");
 
-        // Test for peek and Delete max
-        System.out.println("Peek: " + aaTreePriorityQueue.peek());
-        System.out.println("DeleteMax: " + aaTreePriorityQueue.deleteMax());
-        System.out.println("Peek after Deleting element with highest priority: " + aaTreePriorityQueue.peek());
+        // Testing Priority Queue implemented using Heap Data Structure
+        test(heapPriorityQueue, "Priority Queue implemented using Heap Testing!");
 
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + aaTreePriorityQueue.size());
-        printSpace();
-        // <-------------------------------- AA Tree Testing ends -------------------------------->
+        // Testing Priority Queue implemented using Array Data Structure
+        test(arrayPriorityQueue, "Priority Queue implemented using Array Testing!");
 
+        // Testing Priority Queue implemented using LinkedList Data Structure
+        test(linkedListPriorityQueue, "Priority Queue implemented using LinkedList Testing!");
 
-        // <-------------------------------- Red-Black Tree Testing starts ------------------------------->
-        System.out.println("Red-Black Tree Testing!");
-        // Check is priority queue is empty
-        System.out.println("Is priority Queue empty: " + rbTreePriorityQueue.isEmpty());
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + rbTreePriorityQueue.size());
-
-        // insert elements into the queue
-        rbTreePriorityQueue.insert(4, "Home Assignment");
-        rbTreePriorityQueue.insert(5, "Driving Lessons");
-        rbTreePriorityQueue.insert(1, "Personal Life");
-        rbTreePriorityQueue.insert(2, "Health and Care");
-
-        // Check is priority queue is empty
-        System.out.println("Is priority Queue empty: " + rbTreePriorityQueue.isEmpty());
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + rbTreePriorityQueue.size());
-
-        // Test for peek and Delete max
-        System.out.println("Peek: " + rbTreePriorityQueue.peek());
-        System.out.println("DeleteMax: " + rbTreePriorityQueue.deleteMax());
-        System.out.println("Peek after Deleting element with highest priority: " + rbTreePriorityQueue.peek());
-
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + rbTreePriorityQueue.size());
-        printSpace();
-        // <-------------------------------- Red-Black Tree Testing ends -------------------------------->
-
-
-        // <--------------------------------AVL Tree Testing starts ------------------------------->
-        System.out.println("AVL TreeTesting!");
-        // Check is priority queue is empty
-        System.out.println("Is priority Queue empty: " + avlTreePriorityQueue.isEmpty());
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + avlTreePriorityQueue.size());
-
-        // insert elements into the queue
-        avlTreePriorityQueue.insert(4, "Home Assignment");
-        avlTreePriorityQueue.insert(5, "Driving Lessons");
-        avlTreePriorityQueue.insert(1, "Personal Life");
-        avlTreePriorityQueue.insert(2, "Health and Care");
-
-        // Check is priority queue is empty
-        System.out.println("Is priority Queue empty: " + avlTreePriorityQueue.isEmpty());
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + avlTreePriorityQueue.size());
-
-        // Test for peek and Delete max
-        System.out.println("Peek: " + avlTreePriorityQueue.peek());
-        System.out.println("DeleteMax: " + avlTreePriorityQueue.deleteMax());
-        System.out.println("Peek after Deleting element with highest priority: " + avlTreePriorityQueue.peek());
-
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + avlTreePriorityQueue.size());
-        System.out.println("\n\n\n\n\n\n");
-        // <-------------------------------- AVL Tree Testing ends -------------------------------->
-
-
-        // <-------------------------------- Heap Testing starts ------------------------------->
-        System.out.println("Heap Testing!");
-        // Check is priority queue is empty
-        System.out.println("Is priority Queue empty: " + heapPriorityQueue.isEmpty());
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + heapPriorityQueue.size());
-
-        // insert elements into the queue
-        heapPriorityQueue.insert(4, "Home Assignment");
-        heapPriorityQueue.insert(5, "Driving Lessons");
-        heapPriorityQueue.insert(1, "Personal Life");
-        heapPriorityQueue.insert(2, "Health and Care");
-
-        // Check is priority queue is empty
-        System.out.println("Is priority Queue empty: " + heapPriorityQueue.isEmpty());
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + heapPriorityQueue.size());
-
-        // Test for peek and Delete max
-        System.out.println("Peek: " + heapPriorityQueue.peek());
-        System.out.println("DeleteMax: " + heapPriorityQueue.deleteMax());
-        System.out.println("Peek after Deleting element with highest priority: " + heapPriorityQueue.peek());
-
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + heapPriorityQueue.size());
-        System.out.println("\n\n\n\n\n\n");
-        // <-------------------------------- Heap Testing ends -------------------------------->
-
-
-        // <-------------------------------- Array Testing starts ------------------------------->
-        System.out.println("Array Testing!");
-        // Check is priority queue is empty
-        System.out.println("Is priority Queue empty: " + arrayPriorityQueue.isEmpty());
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + arrayPriorityQueue.size());
-
-        // insert elements into the queue
-        arrayPriorityQueue.insert(4, "Home Assignment");
-        arrayPriorityQueue.insert(5, "Driving Lessons");
-        arrayPriorityQueue.insert(1, "Personal Life");
-        arrayPriorityQueue.insert(2, "Health and Care");
-
-        // Check is priority queue is empty
-        System.out.println("Is priority Queue empty: " + arrayPriorityQueue.isEmpty());
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + arrayPriorityQueue.size());
-
-        // Test for peek and Delete max
-        System.out.println("Peek: " + arrayPriorityQueue.peek());
-        System.out.println("DeleteMax: " + arrayPriorityQueue.deleteMax());
-        System.out.println("Peek after Deleting element with highest priority: " + arrayPriorityQueue.peek());
-
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + arrayPriorityQueue.size());
-        System.out.println("\n\n\n\n\n\n");
-        // <-------------------------------- Array Testing ends -------------------------------->
-
-
-        // <-------------------------------- LinkedList Testing starts ------------------------------->
-        System.out.println("LinkedList Testing!");
-        // Check is priority queue is empty
-        System.out.println("Is priority Queue empty: " + linkedListPriorityQueue.isEmpty());
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + linkedListPriorityQueue.size());
-
-        // insert elements into the queue
-        linkedListPriorityQueue.insert(4, "Home Assignment");
-        linkedListPriorityQueue.insert(5, "Driving Lessons");
-        linkedListPriorityQueue.insert(1, "Personal Life");
-        linkedListPriorityQueue.insert(2, "Health and Care");
-
-        // Check is priority queue is empty
-        System.out.println("Is priority Queue empty: " + linkedListPriorityQueue.isEmpty());
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + linkedListPriorityQueue.size());
-
-        // Test for peek and Delete max
-        System.out.println("Peek: " + linkedListPriorityQueue.peek());
-        System.out.println("DeleteMax: " + linkedListPriorityQueue.deleteMax());
-        System.out.println("Peek after Deleting element with highest priority: " + linkedListPriorityQueue.peek());
-
-        // Check the size of the priority queue
-        System.out.println("Size of the priority queue: " + linkedListPriorityQueue.size());
-        System.out.println("\n\n\n\n\n\n");
-        // <-------------------------------- LinkedList Testing ends -------------------------------->
+        removeAllDataToPriorityQueue(aaTreePriorityQueue);
+        removeAllDataToPriorityQueue(rbTreePriorityQueue);
+        removeAllDataToPriorityQueue(avlTreePriorityQueue);
+        removeAllDataToPriorityQueue(heapPriorityQueue);
+        removeAllDataToPriorityQueue(arrayPriorityQueue);
+        removeAllDataToPriorityQueue(linkedListPriorityQueue);
     }
 }
